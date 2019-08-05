@@ -35,8 +35,20 @@ class Timer extends Component {
             interval: undefined
         })
     }
+
+    reset = () => {
+        if(!this.state.interval) {
+            return
+        }
+        clearInterval(this.state.interval)
+        this.setState({
+            interval: undefined,
+            timeMs:0
+        })
+    }
+
     render() {
-        return <div>
+        return <div className="wrapper-div">
             <Time ms={this.state.timeMs} />
             <div className="btn-div">
                 <input
@@ -48,7 +60,12 @@ class Timer extends Component {
                     className="btn-input"
                     type="button"
                     value="Pause"
-                    onClick={this.pause} />  
+                    onClick={this.pause} />
+                <input
+                    className="btn-input"
+                    type="button"
+                    value="Reset"
+                    onClick={this.reset} />      
             </div>      
         </div>
     }
